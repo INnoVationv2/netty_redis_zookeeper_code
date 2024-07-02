@@ -93,7 +93,7 @@ class EchoHandler implements Runnable {
         c.configureBlocking(false);
         channel = c;
         // Channel初始化为Read模式
-        sk = channel.register(selector, SelectionKey.OP_READ);
+        sk = channel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
         sk.attach(this);
         // 更新selector监测状态
         selector.wakeup();
@@ -105,7 +105,6 @@ class EchoHandler implements Runnable {
             if (state == SENDING) {
                 channel.write(byteBuffer);
                 byteBuffer.clear();
-                sk.interestOps(SelectionKey.OP_READ);
                 state = RECEIVING;
             } else if (state == RECEIVING) {
                 int len = channel.read(byteBuffer);
@@ -115,7 +114,6 @@ class EchoHandler implements Runnable {
                 } else {
                     System.out.println(new String(byteBuffer.array(), 0, len));
                     byteBuffer.flip();
-                    sk.interestOps(SelectionKey.OP_WRITE);
                     state = SENDING;
                 }
             }
