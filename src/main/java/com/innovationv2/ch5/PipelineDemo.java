@@ -1,10 +1,6 @@
 package com.innovationv2.ch5;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
-import io.netty.channel.embedded.EmbeddedChannel;
-import org.junit.Test;
 
 public class PipelineDemo {
     public static class InHandlerA extends ChannelInboundHandlerAdapter {

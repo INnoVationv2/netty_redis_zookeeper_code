@@ -10,7 +10,7 @@ import io.netty.util.ReferenceCountUtil;
 
 public class NettyDiscardServer {
     private final int serverPort;
-    ServerBootstrap b = new  ServerBootstrap();
+    ServerBootstrap b = new ServerBootstrap();
 
     public NettyDiscardServer(int port) {
         this.serverPort = port;
